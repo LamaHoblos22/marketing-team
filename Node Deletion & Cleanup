@@ -1,0 +1,4 @@
+const removeNodeFromCanvas = (nodeId) => {
+  const { removeNode } = useStore();
+  removeNode(nodeId);
+};
