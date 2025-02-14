@@ -1,0 +1,26 @@
+const NodePalette = () => {
+  const { addNode } = useStore();
+  
+  const createNode = (type, label) => {
+    if (!label) {
+      alert("Label cannot be empty!");
+      return;
+    }
+
+    const node = {
+      id: Date.now().toString(),
+      type,
+      label,
+    };
+    
+    addNode(node);
+  };
+
+  return (
+    <div>
+      <button onClick={() => createNode('trigger', 'New Subscriber Added')}>Add Trigger</button>
+      <button onClick={() => createNode('action', 'Send Welcome Email')}>Add Action</button>
+      <button onClick={() => createNode('condition', 'Has Opened Previous Email?')}>Add Condition</button>
+    </div>
+  );
+};
