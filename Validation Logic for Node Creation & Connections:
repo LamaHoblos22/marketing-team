@@ -1,0 +1,5 @@
+const isValidConnection = (sourceNode, targetNode) => {
+  if (sourceNode.type === 'trigger' && targetNode.type === 'action') return true;
+  if (sourceNode.type === 'condition' && targetNode.type === 'action') return true;
+  return false;
+};
