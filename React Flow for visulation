@@ -1,0 +1,35 @@
+import ReactFlow, { addEdge, MiniMap, Controls } from '@xyflow/react';
+import { useStore } from './store';
+
+const WorkflowCanvas = () => {
+  const { nodes, edges, addEdge } = useStore();
+
+  const onConnect = (params) => {
+    const sourceNode = nodes.find(node => node.id === params.source);
+    const targetNode = nodes.find(node => node.id === params.target);
+    
+    if (isValidConnection(sourceNode, targetNode)) {
+      addEdge(params);
+    } else {
+      // Handle invalid connection
+      alert("Invalid connection");
+    }
+  };
+
+  const isValidConnection = (sourceNode, targetNode) => {
+    // Connection rules
+    if (sourceNode.type === 'trigger' && targetNode.type === 'action') return true;
+    if (sourceNode.type === 'condition' && targetNode.type === 'action') return true;
+    return false;
+  };
+
+  return (
+    <ReactFlow
+      elements={[...nodes, ...edges]}
+      onConnect={onConnect}
+    >
+      <MiniMap />
+      <Controls />
+    </ReactFlow>
+  );
+};
